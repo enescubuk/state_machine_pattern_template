@@ -7,19 +7,19 @@ public class StateController : MonoBehaviour
     private bool InTransition;
     public static StateController Instance;
     private void Awake()
-    {
+    {// Eğer bir örnek yoksa, bu sınıfı singleton olarak ayarlar.
         if (Instance == null)
         {
             Instance = this;
         }
     }
     private void Start() 
-    {
-        //default state
+    {// Oyun başladığında varsayılan durumu ayarlamak için kullanılır.
+        
     }
 
     public void ChangeState<T>() where T : IStateCommand
-    {
+    {// Belirtilen türdeki yeni duruma geçişi sağlar.
         T targetState = GetComponent<T>();
         if (targetState == null)
         {
@@ -29,7 +29,7 @@ public class StateController : MonoBehaviour
     }
 
     void InititeNewState(IStateCommand targetState)
-    {
+    {// Hedef duruma geçişi başlatır, eğer farklıysa ve geçiş yapmıyorsa.
         if (CurrentState != targetState && !InTransition)
         {
             CallNewState(targetState);
@@ -37,7 +37,7 @@ public class StateController : MonoBehaviour
     }
 
     void CallNewState(IStateCommand newState)
-    {
+    {// Yeni duruma geçiş yapar ve ilgili durum metotlarını çağırır.
         InTransition = true;
         CurrentState?.Exit();
         CurrentState = newState;
