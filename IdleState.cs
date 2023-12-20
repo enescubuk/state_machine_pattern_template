@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class IdleState : IStateCommand
 {
-    public void Enter()
+    public override void Enter()
     {
         
     }
 
-    public void Tick()
+    public override void Tick()
     {
         
     }
 
-    public void Exit()
+    public override void Exit()
     {
         
     }
