@@ -1,6 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 public class StateController : MonoBehaviour
 {
     public IStateCommand CurrentState;
@@ -15,7 +15,7 @@ public class StateController : MonoBehaviour
     }
     private void Start() 
     {
-        //default
+        //default state
     }
 
     public void ChangeState<T>() where T : IStateCommand
