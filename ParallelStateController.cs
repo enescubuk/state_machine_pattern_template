@@ -22,15 +22,8 @@ public class ParallelStateController : MonoBehaviour
         }
     }
 
-    public void AddState<T>() where T : MonoBehaviour, IStateCommand
+    public void AddState(IStateCommand newState)
     {
-        T newState = GetComponent<T>();
-        if (newState == null)
-        {
-            Debug.LogWarning("Tried to add a state that doesn't exist on the GameObject");
-            return;
-        }
-
         if (!activeStates.Contains(newState))
         {
             newState.Enter();
@@ -38,10 +31,9 @@ public class ParallelStateController : MonoBehaviour
         }
     }
 
-    public void RemoveState<T>() where T : MonoBehaviour, IStateCommand
+    public void RemoveState(IStateCommand state)
     {
-        T state = GetComponent<T>();
-        if (state != null && activeStates.Contains(state))
+        if (activeStates.Contains(state))
         {
             state.Exit();
             activeStates.Remove(state);
