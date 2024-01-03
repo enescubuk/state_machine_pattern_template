@@ -7,12 +7,18 @@ public class StateController : MonoBehaviour
     private bool InTransition;
     public static StateController Instance;
     private void Awake()
-    {// Eğer bir örnek yoksa, bu sınıfı singleton olarak ayarlar.
+    {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject); // Opsiyonel: Sahne değişikliklerinde yok olmaması için.
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // Bu, mevcut olmayan bir örneği yok eder.
         }
     }
+
     private void Start() 
     {// Oyun başladığında varsayılan durumu ayarlamak için kullanılır.
         
